@@ -48,7 +48,9 @@ public class RouteWatcherReloadStrategy extends FileWatcherResourceReloadStrateg
 
     private static final Logger LOG = LoggerFactory.getLogger(RouteWatcherReloadStrategy.class);
 
-    private String pattern = "*";
+    private static final String DEFAULT_PATTERN = "*.yaml,*.xml";
+
+    private String pattern;
     private boolean removeAllRoutes = true;
 
     public RouteWatcherReloadStrategy() {
@@ -95,6 +97,12 @@ public class RouteWatcherReloadStrategy extends FileWatcherResourceReloadStrateg
     protected void doStart() throws Exception {
         ObjectHelper.notNull(getFolder(), "folder", this);
 
+        if (pattern == null || pattern.isBlank()) {
+            pattern = DEFAULT_PATTERN;
+        } else if ("*".equals(pattern)) {
+            pattern = "**"; // use ant style matching to match everything
+        }
+
         final String base = new File(getFolder()).getAbsolutePath();
         final AntPathMatcher matcher = new AntPathMatcher();
 
@@ -106,7 +114,7 @@ public class RouteWatcherReloadStrategy extends FileWatcherResourceReloadStrateg
                     // strip starting directory, so we have a relative name to the starting folder
                     String path = f.getAbsolutePath();
                     if (path.startsWith(base)) {
-                        path = path.substring(path.lastIndexOf("/"));
+                        path = FileUtil.onlyPath(path);
                     }
                     path = FileUtil.stripLeadingSeparator(path);
 
