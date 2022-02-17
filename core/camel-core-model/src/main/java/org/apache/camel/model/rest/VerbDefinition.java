@@ -80,6 +80,9 @@ public class VerbDefinition extends OptionalIdentifiedDefinition<VerbDefinition>
     private String enableCORS;
 
     @XmlAttribute
+    private String enableAutoDetect;
+
+    @XmlAttribute
     private String type;
 
     @XmlTransient
@@ -293,6 +296,22 @@ public class VerbDefinition extends OptionalIdentifiedDefinition<VerbDefinition>
      */
     public void setEnableCORS(String enableCORS) {
         this.enableCORS = enableCORS;
+    }
+
+    public String getEnableAutoDetect() {
+        return enableAutoDetect;
+    }
+
+    /**
+     * Whether to enable auto-detect of the response body
+     *
+     * If a json response returned as empty String or null body with 200 OK,
+     * Camel auto-detect this and return empty body and 204 instead.
+     *
+     * @param enableAutoDetect
+     */
+    public void setEnableAutoDetect(String enableAutoDetect) {
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     public String getType() {

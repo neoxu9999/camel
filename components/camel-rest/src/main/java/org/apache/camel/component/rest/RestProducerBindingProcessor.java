@@ -17,6 +17,7 @@
 package org.apache.camel.component.rest;
 
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.Locale;
 
 import org.apache.camel.AsyncCallback;
@@ -32,6 +33,12 @@ import org.apache.camel.support.processor.MarshalProcessor;
 import org.apache.camel.support.processor.UnmarshalProcessor;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * A {@link org.apache.camel.Processor} that binds the REST producer request and reply messages from sources of json or
@@ -52,12 +59,13 @@ public class RestProducerBindingProcessor extends DelegateAsyncProcessor {
     private final String bindingMode;
     private final boolean skipBindingOnErrorCode;
     private final String outType;
+    private final boolean enableAutoDetect;
 
     public RestProducerBindingProcessor(AsyncProcessor processor, CamelContext camelContext,
                                         DataFormat jsonDataFormat, DataFormat xmlDataFormat,
                                         DataFormat outJsonDataFormat, DataFormat outXmlDataFormat,
                                         String bindingMode, boolean skipBindingOnErrorCode,
-                                        String outType) {
+                                        String outType, boolean enableAutoDetect) {
 
         super(processor);
 
@@ -88,6 +96,7 @@ public class RestProducerBindingProcessor extends DelegateAsyncProcessor {
         this.bindingMode = bindingMode;
         this.skipBindingOnErrorCode = skipBindingOnErrorCode;
         this.outType = outType;
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     @Override
@@ -321,9 +330,11 @@ public class RestProducerBindingProcessor extends DelegateAsyncProcessor {
                 return;
             }
 
+            // auto-detect the response body
+            autoDetectResponseBody(isXml, isJson, exchange);
+
             // is the body empty
-            if (exchange.hasOut() && exchange.getOut().getBody() == null
-                    || !exchange.hasOut() && exchange.getIn().getBody() == null) {
+            if (exchange.getMessage() == null || exchange.getMessage().getBody() == null) {
                 return;
             }
 
@@ -374,6 +385,45 @@ public class RestProducerBindingProcessor extends DelegateAsyncProcessor {
                 String type = ExchangeHelper.getContentType(exchange);
                 if (type == null) {
                     exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/xml");
+                }
+            }
+        }
+
+        private void autoDetectResponseBody(boolean isXml, boolean isJson, Exchange exchange) {
+            // favor json over xml
+            String body = exchange.getMessage() != null ? exchange.getMessage().getBody(String.class) : null;
+            String responseBody = body != null ? body.trim() : null;
+            if (isJson) {
+                if (responseBody != null) {
+                    if ("[]".equals(responseBody) || "{}".equals(responseBody) || responseBody.length() == 0) {
+                        exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 204);
+                    }
+                } else {
+                    exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 204);
+                }
+            } else if (isXml) {
+                if (responseBody != null) {
+                    try {
+                        // Neither DocumentBuilderFactory nor DocumentBuilder is thread safe.
+                        // So create them for each call.
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        DocumentBuilder builder = factory.newDocumentBuilder();
+                        InputSource inputSource = new InputSource(new StringReader(responseBody));
+                        Document document = builder.parse(inputSource);
+                        Element rootElement = document.getDocumentElement();
+                        if (rootElement != null) {
+                            if (rootElement.getFirstChild() == null) {
+                                exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 204);
+                            }
+                        } else {
+                            exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 204);
+                        }
+
+                    } catch (Exception e) {
+                        exchange.setException(e);
+                    }
+                } else {
+                    exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 204);
                 }
             }
         }

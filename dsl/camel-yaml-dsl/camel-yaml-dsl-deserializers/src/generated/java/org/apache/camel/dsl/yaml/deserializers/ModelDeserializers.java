@@ -3986,6 +3986,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -4045,6 +4046,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -5363,6 +5369,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -5422,6 +5429,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -5806,6 +5818,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -5865,6 +5878,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -9590,6 +9608,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -9649,6 +9668,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -9973,6 +9997,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -10032,6 +10057,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -10482,6 +10512,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -10541,6 +10572,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {
@@ -11531,6 +11567,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "consumes", type = "string"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
                     @YamlProperty(name = "produces", type = "string"),
@@ -11575,6 +11612,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "out-type": {
@@ -11751,6 +11793,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     target.setEnableCORS(java.lang.Boolean.valueOf(val));
                     break;
                 }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(java.lang.Boolean.valueOf(val));
+                    break;
+                }
                 case "endpoint-property": {
                     java.util.List<org.apache.camel.model.rest.RestPropertyDefinition> val = asFlatList(node, org.apache.camel.model.rest.RestPropertyDefinition.class);
                     target.setEndpointProperties(val);
@@ -11868,6 +11915,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "delete", type = "array:org.apache.camel.model.rest.DeleteVerbDefinition"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "get", type = "array:org.apache.camel.model.rest.GetVerbDefinition"),
                     @YamlProperty(name = "head", type = "array:org.apache.camel.model.rest.HeadVerbDefinition"),
                     @YamlProperty(name = "id", type = "string"),
@@ -11920,6 +11968,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "path": {
@@ -17497,6 +17550,7 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                     @YamlProperty(name = "deprecated", type = "boolean"),
                     @YamlProperty(name = "description", type = "string"),
                     @YamlProperty(name = "enable-cors", type = "string"),
+                    @YamlProperty(name = "enable-auto-detect", type = "string"),
                     @YamlProperty(name = "id", type = "string"),
                     @YamlProperty(name = "method", type = "string"),
                     @YamlProperty(name = "out-type", type = "string"),
@@ -17556,6 +17610,11 @@ public final class ModelDeserializers extends YamlDeserializerSupport {
                 case "enable-cors": {
                     String val = asText(node);
                     target.setEnableCORS(val);
+                    break;
+                }
+                case "enable-auto-detect": {
+                    String val = asText(node);
+                    target.setEnableAutoDetect(val);
                     break;
                 }
                 case "method": {

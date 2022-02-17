@@ -60,6 +60,7 @@ public class RestProducer extends DefaultAsyncProducer {
     private Boolean skipBindingOnErrorCode;
     private String type;
     private String outType;
+    private Boolean enableAutoDetect;
 
     // the producer of the Camel component that is used as the HTTP client to call the REST service
     private AsyncProcessor producer;
@@ -137,6 +138,14 @@ public class RestProducer extends DefaultAsyncProducer {
 
     public void setOutType(String outType) {
         this.outType = outType;
+    }
+
+    public Boolean getEnableAutoDetect() {
+        return enableAutoDetect;
+    }
+
+    public void setEnableAutoDetect(Boolean enableAutoDetect) {
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     protected void prepareExchange(Exchange exchange) throws Exception {
@@ -364,7 +373,12 @@ public class RestProducer extends DefaultAsyncProducer {
                     .setupJaxb(camelContext, configuration, type, null, outType, null, jaxb, outJaxb);
         }
 
-        return new RestProducerBindingProcessor(producer, camelContext, json, jaxb, outJson, outJaxb, mode, skip, outType);
+        boolean autoDetect = configuration.isEnableAutoDetect();
+        if (enableAutoDetect != null) {
+            autoDetect = enableAutoDetect;
+        }
+
+        return new RestProducerBindingProcessor(producer, camelContext, json, jaxb, outJson, outJaxb, mode, skip, outType, autoDetect);
     }
 
     private void setAdditionalConfiguration(RestConfiguration config, String prefix, PropertyBindingSupport.Builder builder) {

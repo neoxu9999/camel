@@ -117,6 +117,10 @@ public class RestConfigurationDefinition {
     private Boolean enableCORS;
 
     @XmlAttribute
+    @Metadata(label = "producer")
+    private Boolean enableAutoDetect;
+
+    @XmlAttribute
     private String jsonDataFormat;
 
     @XmlAttribute
@@ -402,6 +406,22 @@ public class RestConfigurationDefinition {
      */
     public void setEnableCORS(Boolean enableCORS) {
         this.enableCORS = enableCORS;
+    }
+
+    public Boolean getEnableAutoDetect() {
+        return enableAutoDetect;
+    }
+
+    /**
+     * Whether to enable auto-detect of the response body
+     *
+     * If a json response returned as empty String or null body with 200 OK,
+     * Camel auto-detect this and return empty body and 204 instead.
+     *
+     * @param enableAutoDetect
+     */
+    public void setEnableAutoDetect(Boolean enableAutoDetect) {
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     public String getJsonDataFormat() {

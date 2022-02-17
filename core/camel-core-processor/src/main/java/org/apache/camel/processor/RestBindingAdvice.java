@@ -71,6 +71,7 @@ public class RestBindingAdvice implements CamelInternalProcessorAdvice<Map<Strin
     private final boolean requiredBody;
     private final Set<String> requiredQueryParameters;
     private final Set<String> requiredHeaders;
+    private final boolean enableAutoDetect;
 
     public RestBindingAdvice(CamelContext camelContext, DataFormat jsonDataFormat, DataFormat xmlDataFormat,
                              DataFormat outJsonDataFormat, DataFormat outXmlDataFormat,
@@ -79,7 +80,7 @@ public class RestBindingAdvice implements CamelInternalProcessorAdvice<Map<Strin
                              Map<String, String> corsHeaders,
                              Map<String, String> queryDefaultValues,
                              boolean requiredBody, Set<String> requiredQueryParameters,
-                             Set<String> requiredHeaders) throws Exception {
+                             Set<String> requiredHeaders, boolean enableAutoDetect) throws Exception {
 
         if (jsonDataFormat != null) {
             this.jsonUnmarshal = new UnmarshalProcessor(jsonDataFormat);
@@ -126,6 +127,7 @@ public class RestBindingAdvice implements CamelInternalProcessorAdvice<Map<Strin
         this.skipBindingOnErrorCode = skipBindingOnErrorCode;
         this.clientRequestValidation = clientRequestValidation;
         this.enableCORS = enableCORS;
+        this.enableAutoDetect = enableAutoDetect;
         this.corsHeaders = corsHeaders;
         this.queryDefaultValues = queryDefaultValues;
         this.requiredBody = requiredBody;
@@ -151,6 +153,11 @@ public class RestBindingAdvice implements CamelInternalProcessorAdvice<Map<Strin
         if (state.get(STATE_KEY_DO_MARSHAL) != null) {
             marshal(exchange, state);
         }
+
+        if (enableAutoDetect && exchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE).toString() == "200") {
+            // TODO check body
+        }
+
     }
 
     private boolean isOptionsMethod(Exchange exchange, Map<String, Object> state) {

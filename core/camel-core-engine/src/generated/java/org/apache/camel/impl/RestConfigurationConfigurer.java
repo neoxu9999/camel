@@ -55,6 +55,8 @@ public class RestConfigurationConfigurer extends org.apache.camel.support.compon
         case "DataFormatProperties": target.setDataFormatProperties(property(camelContext, java.util.Map.class, value)); return true;
         case "enablecors":
         case "EnableCORS": target.setEnableCORS(property(camelContext, boolean.class, value)); return true;
+        case "enableautodetect":
+        case "EnableAutoDetect": target.setEnableAutoDetect(property(camelContext, boolean.class, value)); return true;
         case "endpointproperties":
         case "EndpointProperties": target.setEndpointProperties(property(camelContext, java.util.Map.class, value)); return true;
         case "host":
@@ -118,6 +120,8 @@ public class RestConfigurationConfigurer extends org.apache.camel.support.compon
         case "DataFormatProperties": return java.util.Map.class;
         case "enablecors":
         case "EnableCORS": return boolean.class;
+        case "enableautodetect":
+        case "EnableAutoDetect": return boolean.class;
         case "endpointproperties":
         case "EndpointProperties": return java.util.Map.class;
         case "host":
@@ -182,6 +186,8 @@ public class RestConfigurationConfigurer extends org.apache.camel.support.compon
         case "DataFormatProperties": return target.getDataFormatProperties();
         case "enablecors":
         case "EnableCORS": return target.isEnableCORS();
+        case "enableautodetect":
+        case "EnableAutoDetect": target.isEnableAutoDetect();
         case "endpointproperties":
         case "EndpointProperties": return target.getEndpointProperties();
         case "host":

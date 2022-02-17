@@ -51,6 +51,12 @@ public class RestBindingReifier extends AbstractReifier {
         if (definition.getEnableCORS() != null) {
             cors = parseBoolean(definition.getEnableCORS(), false);
         }
+
+        boolean autoDetect = config.isEnableAutoDetect();
+        if (definition.getEnableAutoDetect() != null) {
+            cors = parseBoolean(definition.getEnableAutoDetect(), false);
+        }
+
         boolean skip = config.isSkipBindingOnErrorCode();
         if (definition.getSkipBindingOnErrorCode() != null) {
             skip = parseBoolean(definition.getSkipBindingOnErrorCode(), false);
@@ -70,7 +76,7 @@ public class RestBindingReifier extends AbstractReifier {
                     parseString(definition.getConsumes()), parseString(definition.getProduces()), mode, skip, validation, cors,
                     corsHeaders,
                     definition.getDefaultValues(), definition.getRequiredBody() != null ? definition.getRequiredBody() : false,
-                    definition.getRequiredQueryParameters(), definition.getRequiredHeaders());
+                    definition.getRequiredQueryParameters(), definition.getRequiredHeaders(), autoDetect);
         }
 
         // setup json data format
@@ -142,7 +148,7 @@ public class RestBindingReifier extends AbstractReifier {
                 parseString(definition.getConsumes()), parseString(definition.getProduces()),
                 mode, skip, validation, cors, corsHeaders,
                 definition.getDefaultValues(), definition.getRequiredBody() != null ? definition.getRequiredBody() : false,
-                definition.getRequiredQueryParameters(), definition.getRequiredHeaders());
+                definition.getRequiredQueryParameters(), definition.getRequiredHeaders(), autoDetect);
     }
 
     protected void setupJson(

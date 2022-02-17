@@ -81,6 +81,9 @@ public class RestDefinition extends OptionalIdentifiedDefinition<RestDefinition>
     private String enableCORS;
 
     @XmlAttribute
+    private String enableAutoDetect;
+
+    @XmlAttribute
     private String apiDocs;
 
     @XmlElement(name = "securityDefinitions") // use the name Swagger/OpenAPI uses
@@ -235,6 +238,22 @@ public class RestDefinition extends OptionalIdentifiedDefinition<RestDefinition>
      */
     public void setEnableCORS(String enableCORS) {
         this.enableCORS = enableCORS;
+    }
+
+    public String getEnableAutoDetect() {
+        return enableAutoDetect;
+    }
+
+    /**
+     * Whether to enable auto-detect of the response body
+     *
+     * If a json response returned as empty String or null body with 200 OK,
+     * Camel auto-detect this and return empty body and 204 instead.
+     *
+     * @param enableAutoDetect
+     */
+    public void setEnableAutoDetect(String enableAutoDetect) {
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     public String getApiDocs() {
@@ -567,6 +586,18 @@ public class RestDefinition extends OptionalIdentifiedDefinition<RestDefinition>
         return this;
     }
 
+    public RestDefinition enableAutoDetect(boolean enableAutoDetect) {
+        if (getVerbs().isEmpty()) {
+            this.enableAutoDetect = Boolean.toString(enableAutoDetect);
+        } else {
+            // add on last verb as that is how the Java DSL works
+            VerbDefinition verb = getVerbs().get(getVerbs().size() - 1);
+            verb.setEnableAutoDetect(Boolean.toString(enableAutoDetect));
+        }
+
+        return this;
+    }
+
     /**
      * Include or exclude the current Rest Definition in API documentation.
      * <p/>
@@ -859,6 +890,11 @@ public class RestDefinition extends OptionalIdentifiedDefinition<RestDefinition>
                 binding.setEnableCORS(verb.getEnableCORS());
             } else {
                 binding.setEnableCORS(getEnableCORS());
+            }
+            if (verb.getEnableAutoDetect() != null) {
+                binding.setEnableAutoDetect(verb.getEnableAutoDetect());
+            } else {
+                binding.setEnableAutoDetect(getEnableAutoDetect());
             }
             for (RestOperationParamDefinition param : verb.getParams()) {
                 // register all the default values for the query and header parameters

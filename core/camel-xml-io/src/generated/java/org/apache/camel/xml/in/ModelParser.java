@@ -1077,6 +1077,7 @@ public class ModelParser extends BaseParser {
                 case "clientRequestValidation": def.setClientRequestValidation(val); break;
                 case "consumes": def.setConsumes(val); break;
                 case "enableCORS": def.setEnableCORS(val); break;
+                case "enableAutoDetect": def.setEnableAutoDetect(val); break;
                 case "path": def.setPath(val); break;
                 case "produces": def.setProduces(val); break;
                 case "skipBindingOnErrorCode": def.setSkipBindingOnErrorCode(val); break;
@@ -1108,6 +1109,7 @@ public class ModelParser extends BaseParser {
                 case "component": def.setComponent(val); break;
                 case "consumes": def.setConsumes(val); break;
                 case "enableCORS": def.setEnableCORS(val); break;
+                case "enableAutoDetect": def.setEnableAutoDetect(val); break;
                 case "outType": def.setOutType(val); break;
                 case "produces": def.setProduces(val); break;
                 case "skipBindingOnErrorCode": def.setSkipBindingOnErrorCode(val); break;
@@ -2824,6 +2826,7 @@ public class ModelParser extends BaseParser {
                 case "consumes": def.setConsumes(val); break;
                 case "deprecated": def.setDeprecated(Boolean.valueOf(val)); break;
                 case "enableCORS": def.setEnableCORS(val); break;
+                case "enableAutoDetect": def.setEnableAutoDetect(val); break;
                 case "method": def.setMethod(val); break;
                 case "outType": def.setOutType(val); break;
                 case "produces": def.setProduces(val); break;
@@ -2940,6 +2943,7 @@ public class ModelParser extends BaseParser {
                 case "component": def.setComponent(val); break;
                 case "contextPath": def.setContextPath(val); break;
                 case "enableCORS": def.setEnableCORS(Boolean.valueOf(val)); break;
+                case "enableAutoDetect": def.setEnableAutoDetect(Boolean.valueOf(val)); break;
                 case "host": def.setHost(val); break;
                 case "hostNameResolver": def.setHostNameResolver(RestHostNameResolver.valueOf(val)); break;
                 case "jsonDataFormat": def.setJsonDataFormat(val); break;

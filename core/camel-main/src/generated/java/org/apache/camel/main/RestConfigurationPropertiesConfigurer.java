@@ -55,6 +55,8 @@ public class RestConfigurationPropertiesConfigurer extends org.apache.camel.supp
         case "DataFormatProperties": target.setDataFormatProperties(property(camelContext, java.util.Map.class, value)); return true;
         case "enablecors":
         case "EnableCORS": target.setEnableCORS(property(camelContext, boolean.class, value)); return true;
+        case "enableautodetect":
+        case "EnableAutoDetect": target.setEnableAutoDetect(property(camelContext, boolean.class, value)); return true;
         case "endpointproperties":
         case "EndpointProperties": target.setEndpointProperties(property(camelContext, java.util.Map.class, value)); return true;
         case "host":

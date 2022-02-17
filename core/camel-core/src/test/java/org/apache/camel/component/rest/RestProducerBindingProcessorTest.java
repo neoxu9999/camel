@@ -60,7 +60,7 @@ public class RestProducerBindingProcessorTest {
 
         final RestProducerBindingProcessor bindingProcessor = new RestProducerBindingProcessor(
                 processor, context, jsonDataFormat, xmlDataFormat, outJsonDataFormat,
-                outXmlDataFormat, "json", true, outType);
+                outXmlDataFormat, "json", true, outType, false);
 
         final Exchange exchange = new DefaultExchange(context);
         final Message input = new DefaultMessage(context);
@@ -95,7 +95,7 @@ public class RestProducerBindingProcessorTest {
 
         final RestProducerBindingProcessor bindingProcessor = new RestProducerBindingProcessor(
                 processor, context, jsonDataFormat, xmlDataFormat, outJsonDataFormat,
-                outXmlDataFormat, "xml", true, outType);
+                outXmlDataFormat, "xml", true, outType, false);
 
         final Exchange exchange = new DefaultExchange(context);
         final Message input = new DefaultMessage(context);
@@ -130,7 +130,7 @@ public class RestProducerBindingProcessorTest {
 
         final RestProducerBindingProcessor bindingProcessor = new RestProducerBindingProcessor(
                 processor, context, jsonDataFormat, xmlDataFormat, outJsonDataFormat,
-                outXmlDataFormat, "off", true, outType);
+                outXmlDataFormat, "off", true, outType, false);
 
         final Exchange exchange = new DefaultExchange(context);
         final Message input = new DefaultMessage(context);

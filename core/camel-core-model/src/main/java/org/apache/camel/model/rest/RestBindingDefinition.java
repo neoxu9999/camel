@@ -82,6 +82,9 @@ public class RestBindingDefinition extends OptionalIdentifiedDefinition<RestBind
     private String enableCORS;
 
     @XmlAttribute
+    private String enableAutoDetect;
+
+    @XmlAttribute
     private String component;
 
     public RestBindingDefinition() {
@@ -289,6 +292,22 @@ public class RestBindingDefinition extends OptionalIdentifiedDefinition<RestBind
      */
     public void setEnableCORS(String enableCORS) {
         this.enableCORS = enableCORS;
+    }
+
+    public String getEnableAutoDetect() {
+        return enableAutoDetect;
+    }
+
+    /**
+     * Whether to enable auto-detect of the response body
+     *
+     * If a json response returned as empty String or null body with 200 OK,
+     * Camel auto-detect this and return empty body and 204 instead.
+     *
+     * @param enableAutoDetect
+     */
+    public void setEnableAutoDetect(String enableAutoDetect) {
+        this.enableAutoDetect = enableAutoDetect;
     }
 
     @Override
