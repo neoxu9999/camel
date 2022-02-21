@@ -53,10 +53,10 @@ public class RestConfigurationPropertiesConfigurer extends org.apache.camel.supp
         case "CorsHeaders": target.setCorsHeaders(property(camelContext, java.util.Map.class, value)); return true;
         case "dataformatproperties":
         case "DataFormatProperties": target.setDataFormatProperties(property(camelContext, java.util.Map.class, value)); return true;
-        case "enablecors":
-        case "EnableCORS": target.setEnableCORS(property(camelContext, boolean.class, value)); return true;
         case "enableautodetect":
         case "EnableAutoDetect": target.setEnableAutoDetect(property(camelContext, boolean.class, value)); return true;
+        case "enablecors":
+        case "EnableCORS": target.setEnableCORS(property(camelContext, boolean.class, value)); return true;
         case "endpointproperties":
         case "EndpointProperties": target.setEndpointProperties(property(camelContext, java.util.Map.class, value)); return true;
         case "host":
@@ -118,6 +118,8 @@ public class RestConfigurationPropertiesConfigurer extends org.apache.camel.supp
         case "CorsHeaders": return java.util.Map.class;
         case "dataformatproperties":
         case "DataFormatProperties": return java.util.Map.class;
+        case "enableautodetect":
+        case "EnableAutoDetect": return boolean.class;
         case "enablecors":
         case "EnableCORS": return boolean.class;
         case "endpointproperties":
@@ -182,6 +184,8 @@ public class RestConfigurationPropertiesConfigurer extends org.apache.camel.supp
         case "CorsHeaders": return target.getCorsHeaders();
         case "dataformatproperties":
         case "DataFormatProperties": return target.getDataFormatProperties();
+        case "enableautodetect":
+        case "EnableAutoDetect": return target.isEnableAutoDetect();
         case "enablecors":
         case "EnableCORS": return target.isEnableCORS();
         case "endpointproperties":

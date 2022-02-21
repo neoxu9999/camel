@@ -305,8 +305,8 @@ public class VerbDefinition extends OptionalIdentifiedDefinition<VerbDefinition>
     /**
      * Whether to enable auto-detect of the response body
      *
-     * If a json response returned as empty String or null body with 200 OK,
-     * Camel auto-detect this and return empty body and 204 instead.
+     * If a json response returned as empty String or null body with 200 OK, Camel auto-detect this and return empty
+     * body and 204 instead.
      *
      * @param enableAutoDetect
      */

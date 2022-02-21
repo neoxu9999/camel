@@ -154,10 +154,6 @@ public class RestBindingAdvice implements CamelInternalProcessorAdvice<Map<Strin
             marshal(exchange, state);
         }
 
-        if (enableAutoDetect && exchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE).toString() == "200") {
-            // TODO check body
-        }
-
     }
 
     private boolean isOptionsMethod(Exchange exchange, Map<String, Object> state) {

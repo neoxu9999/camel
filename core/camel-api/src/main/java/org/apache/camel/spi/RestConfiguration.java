@@ -68,7 +68,7 @@ public class RestConfiguration {
     private boolean skipBindingOnErrorCode = true;
     private boolean clientRequestValidation;
     private boolean enableCORS;
-    private boolean enableAutoDetect = false;
+    private boolean enableAutoDetect;
     private String jsonDataFormat;
     private String xmlDataFormat;
     private Map<String, Object> componentProperties;
@@ -455,17 +455,25 @@ public class RestConfiguration {
         this.enableCORS = enableCORS;
     }
 
+    /**
+     * Whether to enable auto-detect of the response body If a json response returned as empty String or null body with
+     * 200 OK, Camel auto-detect this and return empty body and 204 instead.
+     * <p/>
+     * This option is default <tt>false</tt>
+     *
+     * @return whether auto-detect is enabled
+     */
     public boolean isEnableAutoDetect() {
         return enableAutoDetect;
     }
 
     /**
-     * Whether to enable auto-detect of the response body
+     * Whether to enable auto-detect of the response body If a json response returned as empty String or null body with
+     * 200 OK,Camel auto-detect this and return empty body and 204 instead.
+     * <p/>
+     * This option is default <tt>false</tt>
      *
-     * If a json response returned as empty String or null body with 200 OK,
-     * Camel auto-detect this and return empty body and 204 instead.
-     *
-     * @param enableAutoDetect
+     * @param enableAutoDetect <tt>true</tt> to enable aut-detect
      */
     public void setEnableAutoDetect(boolean enableAutoDetect) {
         this.enableAutoDetect = enableAutoDetect;

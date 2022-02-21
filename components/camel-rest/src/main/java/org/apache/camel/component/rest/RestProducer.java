@@ -378,7 +378,8 @@ public class RestProducer extends DefaultAsyncProducer {
             autoDetect = enableAutoDetect;
         }
 
-        return new RestProducerBindingProcessor(producer, camelContext, json, jaxb, outJson, outJaxb, mode, skip, outType, autoDetect);
+        return new RestProducerBindingProcessor(
+                producer, camelContext, json, jaxb, outJson, outJaxb, mode, skip, outType, autoDetect);
     }
 
     private void setAdditionalConfiguration(RestConfiguration config, String prefix, PropertyBindingSupport.Builder builder) {
